@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="text-align: center;">Diário do Professor</h2>
+<hr>
+
+
+	{% for record in records %}
+	<!-- 	<details>
+			<summary>{{record.student}}</summary>
+			<p>{{record.note}}</p>
+		</details>	 -->
+		<p>
+		  <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapse_{{ record.student }}" role="button" aria-expanded="false" aria-controls="collapse_{{ record.student }}">
+		    {{record.student}}
+		  </a>
+		</p>
+		<div class="collapse" id="collapse_{{ record.student }}">
+		  <div class="card card-body">
+		    {{record.note}}
+		  </div>
+		</div>
+
+	{% endfor %}
+	<form action="{{url_for('about')}}" method="POST">
+		<div class="form-group">
+			<label>student</label>
+			<input type="text" name="student" class="form-control" placeholder="Digite o nome do student" required>
+		</div>
+		<div class="form-group">
+			<label>note</label>
+			<input type="text" class="form-control" name="note" placeholder="Digite uma note" required>
+			<button class="btn btn-success">Adicionar</button>
+		</div>
+	</form>
+{% endblock content %}
